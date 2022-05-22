@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This will set the viewport of your page, which will give the browser instructions on how to control the page's dimensions and scaling. -->
+    <link rel="stylesheet" href="./style.css">
+    
+  </head>
+    <body> 
+        <div class="wrapper">
+            <div class="box a">
+                <h1> Pedestrian and Bicyclist Safety in San Antonio:
+                    <h1>Identifying Areas Suitable for New Safety Measures </h1>
+                </h1>
+                
+                <p style="text-align:center">Valeria Alderete</p>
+
+                <button type="button" class="collapsible active">Research Memo</button>
+                <div class="content" style="display: block">
+                    <p>
+                    This project seeks to identify areas suitable for speed humps, bike facilities, and walking trails as a means of counteracting pedestrian and bicyclist injuries in San Antonio, TX. For the purpose of this project, the term “safety measure(s)” refers to speed humps, bike facilities, and/or walking trails. The project will begin with an exploration and visualization (mapping) of existing safety measures. To analyze the benefits of these existing safety measures, an analysis of pedestrian and bicyclist injury incidents that occurred within close proximity (800 meters, for example) of a safety measure will be performed (likely through buffering methods). The project will then visualize injury incidents to reveal clusters or “hot spots” of these incidents – these clusters will represent areas that are suitable for future safety measure installation (if none already exist there).  
+                    </p>
+
+                    <p>
+                    Ultimately, this project seeks to identify areas of concern (high incident occurrence) for further study, to promote future improvements, to encourage community engagement between residents and policymakers, and to drive informed decisions in local government.
+                    </p>
+                </div>
+                
+                <button type="button" class="collapsible">Summary</button>
+                <div class="content">
+
+                <p> 
+                Visualizing all datasets reveals the first-order observations, some of which include: Noticeable hot-spots of Pedestrian and Bicyclist injuries, where they are clustered along the darker polylines and a seemingly random distribution of many safety measures throughout the city, where it <i>appears</i> that some safety measures overlap with injury areas. 
+                </p> 
+
+                <p>
+                For a more in-depth look, I analyzed the success of existing safety measures by creating a buffer zone around the Injury Areas (buffer zone not viewable in the map). I wanted to know if safety measures exist near the injury areas as this would allow me to gauge the success of existing safety measures <i>and</i> to identify areas suitable for the installation of new safety measures. To do so, I applied a 300 ft. buffer zone<i style="font-size: 70% ;" >*</i> around severe injury areas.                     
+                <p>
+                    <i style="font-size: 70% ;" > *the 300 ft. buffer distance was used in accordance with safety recommendations from the National Association of City Transportation Officials. </i> 
+                </p>
+                </p>
+
+                <p> 
+
+                    The buffer zone would allow me to gauge the success of existing safety measures because, presumably, fewer injury incidents would have occurred <b>within 300 ft. of existing safety measures</b> indicating success, where existing safety measures are counteracting pedestrian and bicyclist injuries 
+                    
+                    </p> 
+                    
+                     
+                    
+                    <p> 
+                    
+                    <b>AND</b> 
+                    
+                    </p> 
+                    
+                    <p> 
+                    
+                    Fewer safety measures will exist <b>within the buffer zones</b>, indicating 
+                    
+                    <p style="margin-left: 7%;"> 
+                    
+                    1) that a lack of safety measures within the buffer zones is contributing to bicyclist and pedestrian injuries and 
+                    
+                    </p> 
+                    
+                    <p style="margin-left: 7%;"> 
+                    
+                    2) that these areas may be suitable for the installation of safety measures 
+                    
+                    </p> 
+                    
+                    </p>
+                
+                    <p> 
+
+                        After applying the buffer zones for a more in-depth analysis, Second-Order observations can be made, some of which include Safety Measures that fall <b>within the buffer zones</b> (depicted in green): 
+                        
+                        </p> 
+                        
+                        <p style="margin-left: 7%;">  
+                        
+                        -Speed Bumps – green circles 
+                        
+                        </p> 
+                        
+                        <p style="margin-left: 7%;"> 
+                        
+                        -Bike Lanes, Bike Routes, Walking Trails – green polylines 
+                        
+                        </p> 
+                        
+                        <p> 
+                        
+                        Below are key findings in the analysis of Safety Measures that fall within the buffer zones. (To better examine these features, zoom in to areas of interest.) 
+                        
+                         
+                        
+                        <p style="margin-left: 7%;"> 
+                        
+                        <b>Only 5 of 2,117 (0.26%) Speed Bumps are within the pedestrian injury buffer zone.</b> 
+                        
+                        </p> 
+                        
+                        <p style="margin-left: 7%;"> 
+                        
+                        <b>Only 6% of Bike Lanes, Bike Routes, and Trails intersect with the pedestrian injury buffer zone. </b> 
+                        
+                        </p>				 
+                        
+                        <p style="margin-left: 7%;"> 
+                        
+                        <b>Only 1 of 2,117 (0.05%) Speed Bumps is within the bicyclist injury buffer zone </b> 
+                        
+                        </p>	 
+                        
+                        <p style="margin-left: 7%;"> 
+                        
+                        <b>Only 2.5% of Bike Lanes, Bike Routes, and Trails intersect with the bicyclist injury buffer zone. </b> 
+                        
+                        </p>	 
+                        
+                        <p> 
+                        
+                        Ultimately, these findings indicate that the <b>lack of safety measures</b>, <i>especially speed bumps</i>, within both the PEDESTRIAN and BICYLIST injury incident buffer zones is a possible cause for higher injury incidents and that the areas within the buffer zones might be suitable for the installation of new safety measures. To better illustrate this in a static layout, I have drawn attention to two areas on the map layout where there are little to no existing safety measures within 300 ft of areas that have high counts of injuries – these areas may benefit from the installation of safety measures. 
+                        
+                        </p> 
+                    </div>
+
+                    <button type="button" class="collapsible">Annotated Bibliography & Data Sources</button>
+                    <div class="content">
+                        <p> 
+
+                            “3. Vector Data.” 3. Vector Data - QGIS Documentation Documentation, Documentation QGIS, 1 Apr. 
+                            
+                            2022, https://docs.qgis.org/3.22/en/docs/gentle_gis_introduction/vector_data.html. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;">  
+                            
+                            QGIS Documentation outlining the use of vector data in QGIS. This resource is to be used in the research project to aid in the proper importing and operation application of identified polyline, polygon, and point datasets as a geographic feature.  
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            Anselin, Luc. “Local Spatial Autocorrelation (1).” Geoda, GeoDa Center, https://geodacenter.github.io/workbook/6a_local_auto/lab6a.html. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            Documentation by GeoDa Center, overviewing Local Spatial Autocorrelation. Statistics and Moans I statistics. This resource will be used in the research project to aid in identifying spatial clusters of severe pedestrian injuries and severe bicyclist injuries in GeoDa and to prep any data that might be needed for further analysis in QGIS, such as LISA statistics. 
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Bike Facilities.” Open Data SA, City of San Antonio, 9 Apr. 2022, https://data.sanantonio.gov/dataset/bike-facilities2. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            A geographic polyline dataset which includes datapoints for the locations of active and future bicycle paths, lanes, routes, or trails in the city of San Antonio (Texas). The dataset is published by the City of San Antonio and maintained by the City of San Antonio Public Works Department’s Infrastructure Inventory Management. 
+                            
+                            The datapoints of active bicycle paths, lanes, routes, and trails will be used in this research project for exportation and analysis, specifically with pedestrian and bicyclist injury incidents to help identify areas of success or areas of need. 
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            Bureau, US Census. “Cartographic Boundary Files.” Census.gov, 7 Apr. 2022, https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2020.html. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            A GIS cartographic boundary file from the United States Census Bureau depicting all U.S. counties, 2020. 
+                            
+                            This GIS shapefile will be used in this project as the background layer for visual context of San Antonio, TX. The layer will be manipulated to display only the county within San Antonio (Bexar County).  
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Park Trails.” Open Data SA, City of San Antonio, 9 Apr. 2022, https://data.sanantonio.gov/dataset/park-trails2. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            A geographic polyline dataset depicting park trails in San Antonio (Texas) intended for bicyclists and pedestrians. The dataset is published by the City of San Antonio Parks and Recreation Department. 
+                            
+                            These datapoints of park trails will be used in this research project for exportation and analysis, specifically with pedestrian and bicyclist injury incidents to help identify areas of success or areas of need. 
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Perform Analysis.” Perform Analysis-ArcGIS Online Help | Documentation, ESRI, https://doc.arcgis.com/en/arcgis-online/analyze/perform-analysis.htm. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            ESRI documentation outlining an overview of various GIS analysis tools, arranged by categories. This resource will be used in the research project to provide guidance in choosing the most appropriate GIS methods to apply within the scope of the research project and goals.  
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Pwseverebicyclistinjuryareas” Open Data SA, Vision Zero Team, 9 Apr. 2022, https://data.sanantonio.gov/dataset/pwseverebicyclistinjuryareas2. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            A geographic dataset depicting areas where two or more severe bicyclist injuries have occurred in close proximity (where the distance between two severe bicyclist injuries is no more than ½-mile) of each other in San Antonio (Tesxas). The data was collected by the City of San Antonio Public Works Department as part of the Vision Zero initiative. 
+                            
+                            The dataset of bicyclist injuries will be used within the scope of this research project to identify areas of concern and areas suitable for the future installation of safety measures. 
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Pwseverepedestrianinjuryareas.” Open Data SA, Vision Zero Team, 9 Apr. 2022, https://data.sanantonio.gov/dataset/pwseverepedestrianinjuryareas2. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            A geographic dataset depicting areas where two or more severe pedestrian injuries have occurred in close proximity (where the distance between two severe pedestrian injuries is no more than ½-mile) of each other in San Antonio (Tesxas). The data was collected by the City of San Antonio Public Works Department as part of the Vision Zero initiative. 
+                            
+                            The dataset of pedestrian injuries will be used within the scope of this research project to identify areas of concern and areas suitable for the future installation of safety measures. 
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Traffic Speed Humps.” Open Data SA, City of San Antonio, 1 May 2022, https://data.sanantonio.gov/dataset/traffic-speed-humps2. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            A geographic dataset depicting active and proposed “Speed Humps” in San Antonio (Texas) and Extraterritorial jurisdiction (ETJ) of the city of San Antonio, TX. Per the publisher, The City of San Antonio, “speed humps” are defined as speed breakers, traffic calming devices that use vertical deflection to slow motor-vehicle traffic in order to improve safety conditions. 
+                            
+                            This dataset will be used in this research project for exportation and analysis, specifically with pedestrian and bicyclist injury incidents to help identify areas of success or areas of need (for the future installation of safety measures). 
+                            
+                            </p> 
+                            
+                            <p> 
+                            
+                            “Vector Spatial Analysis (Buffers).” Documentation QGIS, https://docs.qgis.org/3.22/en/docs/gentle_gis_introduction/vector_spatial_analysis_buffers.html. 
+                            
+                            </p> 
+                            
+                            <p style="margin-left: 7%;"> 
+                            
+                            QGIS documentation outlining the use of geoprocessing buffering methods in spatial analysis, to be used in the research project for identification of pedestrian and bicyclist injury incidents within a specified distance of active safety measures in San Antonio (Texas). The goal is to visualize areas of success for active safety measures, assuming the pedestrian and bicyclist injury incidents are not within the buffer zone, indicating that the safety measures are successfully lessening injury incidents. 
+                            
+                            </p> 
+                    </div>
+
+            </div>
+
+            <div class="box b">
+                <p>
+                    To interact with the map below, click on any of the map features for details, use the legend to select features to be displayed or hidden, filter by city council district, total injuries, and/or total fatal injuries. 
+                </p>
+                    <iframe src="./map.html" title="Interactive Web Map" style="position:relative; top:0px; left:0px; width:100%; height:95%; border: none; overflow: hidden;"></iframe>
+            </div>
+          </div>
+
+
+          <script src="./collapsible.js"></script>
+    </body>
+</html>
+  

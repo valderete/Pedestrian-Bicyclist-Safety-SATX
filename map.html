@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/BikeFacilitiesnotwithinInjuryAreaBufferZones_1.js"></script>
+        <script src="data/ParkTrailsnotwithinInjuryAreaBufferZones_2.js"></script>
+        <script src="data/SpeedBumpsnotwithinInjuryAreaBufferZones_3.js"></script>
+        <script src="data/SevereBicyclistInjuryAreas_4.js"></script>
+        <script src="data/BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5.js"></script>
+        <script src="data/ParkTrailsthatintersectwithbicyclistBufferZone_6.js"></script>
+        <script src="data/SpeedBumpswithinbicyclistBufferZone_7.js"></script>
+        <script src="data/SeverePedestrianInjuryAreas_8.js"></script>
+        <script src="data/BikeLanesRoutesthatintersectwithpedestrianBufferZone_9.js"></script>
+        <script src="data/ParkTrailsthatintersectwithpedestrianBufferZone_10.js"></script>
+        <script src="data/SpeedBumpswithinpedestrianBufferZone_11.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:10
+        }).fitBounds([[29.240636383658718,-98.84704211237793],[29.68941429708384,-98.03386289977631]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_BaseMap_0');
+        map.getPane('pane_BaseMap_0').style.zIndex = 400;
+        var layer_BaseMap_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_BaseMap_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 10,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_BaseMap_0;
+        map.addLayer(layer_BaseMap_0);
+        function pop_BikeFacilitiesnotwithinInjuryAreaBufferZones_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CartID</th>\
+                        <td>' + (feature.properties['CartID'] !== null ? autolinker.link(feature.properties['CartID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BikeFacili</th>\
+                        <td>' + (feature.properties['BikeFacili'] !== null ? autolinker.link(feature.properties['BikeFacili'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MSAG_Name</th>\
+                        <td>' + (feature.properties['MSAG_Name'] !== null ? autolinker.link(feature.properties['MSAG_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ProjectNam</th>\
+                        <td>' + (feature.properties['ProjectNam'] !== null ? autolinker.link(feature.properties['ProjectNam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jurisdicti</th>\
+                        <td>' + (feature.properties['Jurisdicti'] !== null ? autolinker.link(feature.properties['Jurisdicti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Length</th>\
+                        <td>' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintenanc</th>\
+                        <td>' + (feature.properties['Maintenanc'] !== null ? autolinker.link(feature.properties['Maintenanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FacilityNa</th>\
+                        <td>' + (feature.properties['FacilityNa'] !== null ? autolinker.link(feature.properties['FacilityNa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comments</th>\
+                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Shape__Len</th>\
+                        <td>' + (feature.properties['Shape__Len'] !== null ? autolinker.link(feature.properties['Shape__Len'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BikeFacilitiesnotwithinInjuryAreaBufferZones_1_0() {
+            return {
+                pane: 'pane_BikeFacilitiesnotwithinInjuryAreaBufferZones_1',
+                opacity: 1,
+                color: 'rgba(81,134,213,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BikeFacilitiesnotwithinInjuryAreaBufferZones_1');
+        map.getPane('pane_BikeFacilitiesnotwithinInjuryAreaBufferZones_1').style.zIndex = 401;
+        map.getPane('pane_BikeFacilitiesnotwithinInjuryAreaBufferZones_1').style['mix-blend-mode'] = 'normal';
+        var layer_BikeFacilitiesnotwithinInjuryAreaBufferZones_1 = new L.geoJson(json_BikeFacilitiesnotwithinInjuryAreaBufferZones_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BikeFacilitiesnotwithinInjuryAreaBufferZones_1',
+            layerName: 'layer_BikeFacilitiesnotwithinInjuryAreaBufferZones_1',
+            pane: 'pane_BikeFacilitiesnotwithinInjuryAreaBufferZones_1',
+            onEachFeature: pop_BikeFacilitiesnotwithinInjuryAreaBufferZones_1,
+            style: style_BikeFacilitiesnotwithinInjuryAreaBufferZones_1_0,
+        });
+        bounds_group.addLayer(layer_BikeFacilitiesnotwithinInjuryAreaBufferZones_1);
+        map.addLayer(layer_BikeFacilitiesnotwithinInjuryAreaBufferZones_1);
+        function pop_ParkTrailsnotwithinInjuryAreaBufferZones_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Trail_ID'] !== null ? autolinker.link(feature.properties['Trail_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TrailType'] !== null ? autolinker.link(feature.properties['TrailType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TrailSubty'] !== null ? autolinker.link(feature.properties['TrailSubty'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TrailName'] !== null ? autolinker.link(feature.properties['TrailName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TrailMiles'] !== null ? autolinker.link(feature.properties['TrailMiles'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TrailSourc'] !== null ? autolinker.link(feature.properties['TrailSourc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ParkTrailsnotwithinInjuryAreaBufferZones_2_0() {
+            return {
+                pane: 'pane_ParkTrailsnotwithinInjuryAreaBufferZones_2',
+                opacity: 1,
+                color: 'rgba(81,134,213,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ParkTrailsnotwithinInjuryAreaBufferZones_2');
+        map.getPane('pane_ParkTrailsnotwithinInjuryAreaBufferZones_2').style.zIndex = 402;
+        map.getPane('pane_ParkTrailsnotwithinInjuryAreaBufferZones_2').style['mix-blend-mode'] = 'normal';
+        var layer_ParkTrailsnotwithinInjuryAreaBufferZones_2 = new L.geoJson(json_ParkTrailsnotwithinInjuryAreaBufferZones_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ParkTrailsnotwithinInjuryAreaBufferZones_2',
+            layerName: 'layer_ParkTrailsnotwithinInjuryAreaBufferZones_2',
+            pane: 'pane_ParkTrailsnotwithinInjuryAreaBufferZones_2',
+            onEachFeature: pop_ParkTrailsnotwithinInjuryAreaBufferZones_2,
+            style: style_ParkTrailsnotwithinInjuryAreaBufferZones_2_0,
+        });
+        bounds_group.addLayer(layer_ParkTrailsnotwithinInjuryAreaBufferZones_2);
+        map.addLayer(layer_ParkTrailsnotwithinInjuryAreaBufferZones_2);
+        function pop_SpeedBumpsnotwithinInjuryAreaBufferZones_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SH_CartID</th>\
+                        <td>' + (feature.properties['SH_CartID'] !== null ? autolinker.link(feature.properties['SH_CartID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MaterialTy</th>\
+                        <td>' + (feature.properties['MaterialTy'] !== null ? autolinker.link(feature.properties['MaterialTy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Quantity</th>\
+                        <td>' + (feature.properties['Quantity'] !== null ? autolinker.link(feature.properties['Quantity'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Condition</th>\
+                        <td>' + (feature.properties['Condition'] !== null ? autolinker.link(feature.properties['Condition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MSAG_Name</th>\
+                        <td>' + (feature.properties['MSAG_Name'] !== null ? autolinker.link(feature.properties['MSAG_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ProjectNam</th>\
+                        <td>' + (feature.properties['ProjectNam'] !== null ? autolinker.link(feature.properties['ProjectNam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jurisdicti</th>\
+                        <td>' + (feature.properties['Jurisdicti'] !== null ? autolinker.link(feature.properties['Jurisdicti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintenanc</th>\
+                        <td>' + (feature.properties['Maintenanc'] !== null ? autolinker.link(feature.properties['Maintenanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comments</th>\
+                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GlobalID</th>\
+                        <td>' + (feature.properties['GlobalID'] !== null ? autolinker.link(feature.properties['GlobalID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SpeedBumpsnotwithinInjuryAreaBufferZones_3_0() {
+            return {
+                pane: 'pane_SpeedBumpsnotwithinInjuryAreaBufferZones_3',
+                radius: 3.8,
+                opacity: 1,
+                color: 'rgba(81,134,213,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(81,134,213,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SpeedBumpsnotwithinInjuryAreaBufferZones_3');
+        map.getPane('pane_SpeedBumpsnotwithinInjuryAreaBufferZones_3').style.zIndex = 403;
+        map.getPane('pane_SpeedBumpsnotwithinInjuryAreaBufferZones_3').style['mix-blend-mode'] = 'normal';
+        var layer_SpeedBumpsnotwithinInjuryAreaBufferZones_3 = new L.geoJson(json_SpeedBumpsnotwithinInjuryAreaBufferZones_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SpeedBumpsnotwithinInjuryAreaBufferZones_3',
+            layerName: 'layer_SpeedBumpsnotwithinInjuryAreaBufferZones_3',
+            pane: 'pane_SpeedBumpsnotwithinInjuryAreaBufferZones_3',
+            onEachFeature: pop_SpeedBumpsnotwithinInjuryAreaBufferZones_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SpeedBumpsnotwithinInjuryAreaBufferZones_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SpeedBumpsnotwithinInjuryAreaBufferZones_3);
+        map.addLayer(layer_SpeedBumpsnotwithinInjuryAreaBufferZones_3);
+        function pop_SevereBicyclistInjuryAreas_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">StreetName</th>\
+                        <td>' + (feature.properties['StreetName'] !== null ? autolinker.link(feature.properties['StreetName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FromStreet</th>\
+                        <td>' + (feature.properties['FromStreet'] !== null ? autolinker.link(feature.properties['FromStreet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ToStreet</th>\
+                        <td>' + (feature.properties['ToStreet'] !== null ? autolinker.link(feature.properties['ToStreet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Incapacita</th>\
+                        <td>' + (feature.properties['Incapacita'] !== null ? autolinker.link(feature.properties['Incapacita'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fatal_Inju</th>\
+                        <td>' + (feature.properties['Fatal_Inju'] !== null ? autolinker.link(feature.properties['Fatal_Inju'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total_Inju</th>\
+                        <td>' + (feature.properties['Total_Inju'] !== null ? autolinker.link(feature.properties['Total_Inju'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SBIA_Year</th>\
+                        <td>' + (feature.properties['SBIA_Year'] !== null ? autolinker.link(feature.properties['SBIA_Year'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SHAPE_Leng</th>\
+                        <td>' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SevereBicyclistInjuryAreas_4_0(feature) {
+            if (feature.properties['Total_Inju'] >= 2.000000 && feature.properties['Total_Inju'] <= 2.000000 ) {
+                return {
+                pane: 'pane_SevereBicyclistInjuryAreas_4',
+                opacity: 1,
+                color: 'rgba(255,211,167,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['Total_Inju'] >= 2.000000 && feature.properties['Total_Inju'] <= 3.000000 ) {
+                return {
+                pane: 'pane_SevereBicyclistInjuryAreas_4',
+                opacity: 1,
+                color: 'rgba(251,132,50,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['Total_Inju'] >= 3.000000 && feature.properties['Total_Inju'] <= 4.000000 ) {
+                return {
+                pane: 'pane_SevereBicyclistInjuryAreas_4',
+                opacity: 1,
+                color: 'rgba(197,98,6,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_SevereBicyclistInjuryAreas_4');
+        map.getPane('pane_SevereBicyclistInjuryAreas_4').style.zIndex = 404;
+        map.getPane('pane_SevereBicyclistInjuryAreas_4').style['mix-blend-mode'] = 'normal';
+        var layer_SevereBicyclistInjuryAreas_4 = new L.geoJson(json_SevereBicyclistInjuryAreas_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SevereBicyclistInjuryAreas_4',
+            layerName: 'layer_SevereBicyclistInjuryAreas_4',
+            pane: 'pane_SevereBicyclistInjuryAreas_4',
+            onEachFeature: pop_SevereBicyclistInjuryAreas_4,
+            style: style_SevereBicyclistInjuryAreas_4_0,
+        });
+        bounds_group.addLayer(layer_SevereBicyclistInjuryAreas_4);
+        function pop_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CartID</th>\
+                        <td>' + (feature.properties['CartID'] !== null ? autolinker.link(feature.properties['CartID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BikeFacili</th>\
+                        <td>' + (feature.properties['BikeFacili'] !== null ? autolinker.link(feature.properties['BikeFacili'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MSAG_Name</th>\
+                        <td>' + (feature.properties['MSAG_Name'] !== null ? autolinker.link(feature.properties['MSAG_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ProjectNam</th>\
+                        <td>' + (feature.properties['ProjectNam'] !== null ? autolinker.link(feature.properties['ProjectNam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jurisdicti</th>\
+                        <td>' + (feature.properties['Jurisdicti'] !== null ? autolinker.link(feature.properties['Jurisdicti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Length</th>\
+                        <td>' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintenanc</th>\
+                        <td>' + (feature.properties['Maintenanc'] !== null ? autolinker.link(feature.properties['Maintenanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FacilityNa</th>\
+                        <td>' + (feature.properties['FacilityNa'] !== null ? autolinker.link(feature.properties['FacilityNa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comments</th>\
+                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Shape__Len</th>\
+                        <td>' + (feature.properties['Shape__Len'] !== null ? autolinker.link(feature.properties['Shape__Len'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5_0() {
+            return {
+                pane: 'pane_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5',
+                opacity: 1,
+                color: 'rgba(92,202,80,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5');
+        map.getPane('pane_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5').style.zIndex = 405;
+        map.getPane('pane_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5').style['mix-blend-mode'] = 'normal';
+        var layer_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5 = new L.geoJson(json_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5',
+            layerName: 'layer_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5',
+            pane: 'pane_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5',
+            onEachFeature: pop_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5,
+            style: style_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5_0,
+        });
+        bounds_group.addLayer(layer_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5);
+        function pop_ParkTrailsthatintersectwithbicyclistBufferZone_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Trail_ID</th>\
+                        <td>' + (feature.properties['Trail_ID'] !== null ? autolinker.link(feature.properties['Trail_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailType</th>\
+                        <td>' + (feature.properties['TrailType'] !== null ? autolinker.link(feature.properties['TrailType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailSubty</th>\
+                        <td>' + (feature.properties['TrailSubty'] !== null ? autolinker.link(feature.properties['TrailSubty'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailName</th>\
+                        <td>' + (feature.properties['TrailName'] !== null ? autolinker.link(feature.properties['TrailName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailMiles</th>\
+                        <td>' + (feature.properties['TrailMiles'] !== null ? autolinker.link(feature.properties['TrailMiles'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailSourc</th>\
+                        <td>' + (feature.properties['TrailSourc'] !== null ? autolinker.link(feature.properties['TrailSourc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SHAPE_Leng</th>\
+                        <td>' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ParkTrailsthatintersectwithbicyclistBufferZone_6_0() {
+            return {
+                pane: 'pane_ParkTrailsthatintersectwithbicyclistBufferZone_6',
+                opacity: 1,
+                color: 'rgba(92,202,80,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ParkTrailsthatintersectwithbicyclistBufferZone_6');
+        map.getPane('pane_ParkTrailsthatintersectwithbicyclistBufferZone_6').style.zIndex = 406;
+        map.getPane('pane_ParkTrailsthatintersectwithbicyclistBufferZone_6').style['mix-blend-mode'] = 'normal';
+        var layer_ParkTrailsthatintersectwithbicyclistBufferZone_6 = new L.geoJson(json_ParkTrailsthatintersectwithbicyclistBufferZone_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ParkTrailsthatintersectwithbicyclistBufferZone_6',
+            layerName: 'layer_ParkTrailsthatintersectwithbicyclistBufferZone_6',
+            pane: 'pane_ParkTrailsthatintersectwithbicyclistBufferZone_6',
+            onEachFeature: pop_ParkTrailsthatintersectwithbicyclistBufferZone_6,
+            style: style_ParkTrailsthatintersectwithbicyclistBufferZone_6_0,
+        });
+        bounds_group.addLayer(layer_ParkTrailsthatintersectwithbicyclistBufferZone_6);
+        function pop_SpeedBumpswithinbicyclistBufferZone_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SH_CartID</th>\
+                        <td>' + (feature.properties['SH_CartID'] !== null ? autolinker.link(feature.properties['SH_CartID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MaterialTy</th>\
+                        <td>' + (feature.properties['MaterialTy'] !== null ? autolinker.link(feature.properties['MaterialTy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Quantity</th>\
+                        <td>' + (feature.properties['Quantity'] !== null ? autolinker.link(feature.properties['Quantity'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Condition</th>\
+                        <td>' + (feature.properties['Condition'] !== null ? autolinker.link(feature.properties['Condition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MSAG_Name</th>\
+                        <td>' + (feature.properties['MSAG_Name'] !== null ? autolinker.link(feature.properties['MSAG_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ProjectNam</th>\
+                        <td>' + (feature.properties['ProjectNam'] !== null ? autolinker.link(feature.properties['ProjectNam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jurisdicti</th>\
+                        <td>' + (feature.properties['Jurisdicti'] !== null ? autolinker.link(feature.properties['Jurisdicti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintenanc</th>\
+                        <td>' + (feature.properties['Maintenanc'] !== null ? autolinker.link(feature.properties['Maintenanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comments</th>\
+                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GlobalID</th>\
+                        <td>' + (feature.properties['GlobalID'] !== null ? autolinker.link(feature.properties['GlobalID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SpeedBumpswithinbicyclistBufferZone_7_0() {
+            return {
+                pane: 'pane_SpeedBumpswithinbicyclistBufferZone_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(54,116,50,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(92,202,80,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SpeedBumpswithinbicyclistBufferZone_7');
+        map.getPane('pane_SpeedBumpswithinbicyclistBufferZone_7').style.zIndex = 407;
+        map.getPane('pane_SpeedBumpswithinbicyclistBufferZone_7').style['mix-blend-mode'] = 'normal';
+        var layer_SpeedBumpswithinbicyclistBufferZone_7 = new L.geoJson(json_SpeedBumpswithinbicyclistBufferZone_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SpeedBumpswithinbicyclistBufferZone_7',
+            layerName: 'layer_SpeedBumpswithinbicyclistBufferZone_7',
+            pane: 'pane_SpeedBumpswithinbicyclistBufferZone_7',
+            onEachFeature: pop_SpeedBumpswithinbicyclistBufferZone_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SpeedBumpswithinbicyclistBufferZone_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SpeedBumpswithinbicyclistBufferZone_7);
+        function pop_SeverePedestrianInjuryAreas_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CorridorID</th>\
+                        <td>' + (feature.properties['CorridorID'] !== null ? autolinker.link(feature.properties['CorridorID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">StreetName</th>\
+                        <td>' + (feature.properties['StreetName'] !== null ? autolinker.link(feature.properties['StreetName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FromStreet</th>\
+                        <td>' + (feature.properties['FromStreet'] !== null ? autolinker.link(feature.properties['FromStreet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ToStreet</th>\
+                        <td>' + (feature.properties['ToStreet'] !== null ? autolinker.link(feature.properties['ToStreet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Incapacita</th>\
+                        <td>' + (feature.properties['Incapacita'] !== null ? autolinker.link(feature.properties['Incapacita'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fatal_Inju</th>\
+                        <td>' + (feature.properties['Fatal_Inju'] !== null ? autolinker.link(feature.properties['Fatal_Inju'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Total_Inju</th>\
+                        <td>' + (feature.properties['Total_Inju'] !== null ? autolinker.link(feature.properties['Total_Inju'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SPIA_Year</th>\
+                        <td>' + (feature.properties['SPIA_Year'] !== null ? autolinker.link(feature.properties['SPIA_Year'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SHAPE_Leng</th>\
+                        <td>' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SeverePedestrianInjuryAreas_8_0(feature) {
+            if (feature.properties['Total_Inju'] >= 2.000000 && feature.properties['Total_Inju'] <= 4.000000 ) {
+                return {
+                pane: 'pane_SeverePedestrianInjuryAreas_8',
+                opacity: 1,
+                color: 'rgba(255,99,99,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['Total_Inju'] >= 4.000000 && feature.properties['Total_Inju'] <= 9.000000 ) {
+                return {
+                pane: 'pane_SeverePedestrianInjuryAreas_8',
+                opacity: 1,
+                color: 'rgba(213,52,52,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+            if (feature.properties['Total_Inju'] >= 9.000000 && feature.properties['Total_Inju'] <= 15.000000 ) {
+                return {
+                pane: 'pane_SeverePedestrianInjuryAreas_8',
+                opacity: 1,
+                color: 'rgba(170,6,6,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_SeverePedestrianInjuryAreas_8');
+        map.getPane('pane_SeverePedestrianInjuryAreas_8').style.zIndex = 408;
+        map.getPane('pane_SeverePedestrianInjuryAreas_8').style['mix-blend-mode'] = 'normal';
+        var layer_SeverePedestrianInjuryAreas_8 = new L.geoJson(json_SeverePedestrianInjuryAreas_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SeverePedestrianInjuryAreas_8',
+            layerName: 'layer_SeverePedestrianInjuryAreas_8',
+            pane: 'pane_SeverePedestrianInjuryAreas_8',
+            onEachFeature: pop_SeverePedestrianInjuryAreas_8,
+            style: style_SeverePedestrianInjuryAreas_8_0,
+        });
+        bounds_group.addLayer(layer_SeverePedestrianInjuryAreas_8);
+        map.addLayer(layer_SeverePedestrianInjuryAreas_8);
+        function pop_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CartID</th>\
+                        <td>' + (feature.properties['CartID'] !== null ? autolinker.link(feature.properties['CartID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BikeFacili</th>\
+                        <td>' + (feature.properties['BikeFacili'] !== null ? autolinker.link(feature.properties['BikeFacili'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MSAG_Name</th>\
+                        <td>' + (feature.properties['MSAG_Name'] !== null ? autolinker.link(feature.properties['MSAG_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ProjectNam</th>\
+                        <td>' + (feature.properties['ProjectNam'] !== null ? autolinker.link(feature.properties['ProjectNam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jurisdicti</th>\
+                        <td>' + (feature.properties['Jurisdicti'] !== null ? autolinker.link(feature.properties['Jurisdicti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Length</th>\
+                        <td>' + (feature.properties['Length'] !== null ? autolinker.link(feature.properties['Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintenanc</th>\
+                        <td>' + (feature.properties['Maintenanc'] !== null ? autolinker.link(feature.properties['Maintenanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FacilityNa</th>\
+                        <td>' + (feature.properties['FacilityNa'] !== null ? autolinker.link(feature.properties['FacilityNa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comments</th>\
+                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Shape__Len</th>\
+                        <td>' + (feature.properties['Shape__Len'] !== null ? autolinker.link(feature.properties['Shape__Len'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9_0() {
+            return {
+                pane: 'pane_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9',
+                opacity: 1,
+                color: 'rgba(92,202,80,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9');
+        map.getPane('pane_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9').style.zIndex = 409;
+        map.getPane('pane_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9').style['mix-blend-mode'] = 'normal';
+        var layer_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9 = new L.geoJson(json_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9',
+            layerName: 'layer_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9',
+            pane: 'pane_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9',
+            onEachFeature: pop_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9,
+            style: style_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9_0,
+        });
+        bounds_group.addLayer(layer_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9);
+        map.addLayer(layer_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9);
+        function pop_ParkTrailsthatintersectwithpedestrianBufferZone_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Trail_ID</th>\
+                        <td>' + (feature.properties['Trail_ID'] !== null ? autolinker.link(feature.properties['Trail_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailType</th>\
+                        <td>' + (feature.properties['TrailType'] !== null ? autolinker.link(feature.properties['TrailType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailSubty</th>\
+                        <td>' + (feature.properties['TrailSubty'] !== null ? autolinker.link(feature.properties['TrailSubty'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailName</th>\
+                        <td>' + (feature.properties['TrailName'] !== null ? autolinker.link(feature.properties['TrailName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailMiles</th>\
+                        <td>' + (feature.properties['TrailMiles'] !== null ? autolinker.link(feature.properties['TrailMiles'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TrailSourc</th>\
+                        <td>' + (feature.properties['TrailSourc'] !== null ? autolinker.link(feature.properties['TrailSourc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SHAPE_Leng</th>\
+                        <td>' + (feature.properties['SHAPE_Leng'] !== null ? autolinker.link(feature.properties['SHAPE_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ParkTrailsthatintersectwithpedestrianBufferZone_10_0() {
+            return {
+                pane: 'pane_ParkTrailsthatintersectwithpedestrianBufferZone_10',
+                opacity: 1,
+                color: 'rgba(92,202,80,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ParkTrailsthatintersectwithpedestrianBufferZone_10');
+        map.getPane('pane_ParkTrailsthatintersectwithpedestrianBufferZone_10').style.zIndex = 410;
+        map.getPane('pane_ParkTrailsthatintersectwithpedestrianBufferZone_10').style['mix-blend-mode'] = 'normal';
+        var layer_ParkTrailsthatintersectwithpedestrianBufferZone_10 = new L.geoJson(json_ParkTrailsthatintersectwithpedestrianBufferZone_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ParkTrailsthatintersectwithpedestrianBufferZone_10',
+            layerName: 'layer_ParkTrailsthatintersectwithpedestrianBufferZone_10',
+            pane: 'pane_ParkTrailsthatintersectwithpedestrianBufferZone_10',
+            onEachFeature: pop_ParkTrailsthatintersectwithpedestrianBufferZone_10,
+            style: style_ParkTrailsthatintersectwithpedestrianBufferZone_10_0,
+        });
+        bounds_group.addLayer(layer_ParkTrailsthatintersectwithpedestrianBufferZone_10);
+        map.addLayer(layer_ParkTrailsthatintersectwithpedestrianBufferZone_10);
+        function pop_SpeedBumpswithinpedestrianBufferZone_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SH_CartID</th>\
+                        <td>' + (feature.properties['SH_CartID'] !== null ? autolinker.link(feature.properties['SH_CartID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MaterialTy</th>\
+                        <td>' + (feature.properties['MaterialTy'] !== null ? autolinker.link(feature.properties['MaterialTy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Quantity</th>\
+                        <td>' + (feature.properties['Quantity'] !== null ? autolinker.link(feature.properties['Quantity'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Condition</th>\
+                        <td>' + (feature.properties['Condition'] !== null ? autolinker.link(feature.properties['Condition'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">MSAG_Name</th>\
+                        <td>' + (feature.properties['MSAG_Name'] !== null ? autolinker.link(feature.properties['MSAG_Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ProjectNam</th>\
+                        <td>' + (feature.properties['ProjectNam'] !== null ? autolinker.link(feature.properties['ProjectNam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Jurisdicti</th>\
+                        <td>' + (feature.properties['Jurisdicti'] !== null ? autolinker.link(feature.properties['Jurisdicti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">District</th>\
+                        <td>' + (feature.properties['District'] !== null ? autolinker.link(feature.properties['District'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Maintenanc</th>\
+                        <td>' + (feature.properties['Maintenanc'] !== null ? autolinker.link(feature.properties['Maintenanc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comments</th>\
+                        <td>' + (feature.properties['Comments'] !== null ? autolinker.link(feature.properties['Comments'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GlobalID</th>\
+                        <td>' + (feature.properties['GlobalID'] !== null ? autolinker.link(feature.properties['GlobalID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SpeedBumpswithinpedestrianBufferZone_11_0() {
+            return {
+                pane: 'pane_SpeedBumpswithinpedestrianBufferZone_11',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(92,202,80,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_SpeedBumpswithinpedestrianBufferZone_11');
+        map.getPane('pane_SpeedBumpswithinpedestrianBufferZone_11').style.zIndex = 411;
+        map.getPane('pane_SpeedBumpswithinpedestrianBufferZone_11').style['mix-blend-mode'] = 'normal';
+        var layer_SpeedBumpswithinpedestrianBufferZone_11 = new L.geoJson(json_SpeedBumpswithinpedestrianBufferZone_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SpeedBumpswithinpedestrianBufferZone_11',
+            layerName: 'layer_SpeedBumpswithinpedestrianBufferZone_11',
+            pane: 'pane_SpeedBumpswithinpedestrianBufferZone_11',
+            onEachFeature: pop_SpeedBumpswithinpedestrianBufferZone_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SpeedBumpswithinpedestrianBufferZone_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_SpeedBumpswithinpedestrianBufferZone_11);
+        map.addLayer(layer_SpeedBumpswithinpedestrianBufferZone_11);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/SpeedBumpswithinpedestrianBufferZone_11.png" /> Speed Bumps within (pedestrian) Buffer Zone': layer_SpeedBumpswithinpedestrianBufferZone_11,'<img src="legend/ParkTrailsthatintersectwithpedestrianBufferZone_10.png" /> Park Trails that intersect with (pedestrian) Buffer Zone': layer_ParkTrailsthatintersectwithpedestrianBufferZone_10,'<img src="legend/BikeLanesRoutesthatintersectwithpedestrianBufferZone_9.png" /> Bike Lanes & Routes that intersect with (pedestrian) Buffer Zone': layer_BikeLanesRoutesthatintersectwithpedestrianBufferZone_9,'Severe Pedestrian Injury Areas<br /><table><tr><td style="text-align: center;"><img src="legend/SeverePedestrianInjuryAreas_8_240.png" /></td><td>2 - 4</td></tr><tr><td style="text-align: center;"><img src="legend/SeverePedestrianInjuryAreas_8_491.png" /></td><td>4 - 9</td></tr><tr><td style="text-align: center;"><img src="legend/SeverePedestrianInjuryAreas_8_9152.png" /></td><td>9 - 15</td></tr></table>': layer_SeverePedestrianInjuryAreas_8,'<img src="legend/SpeedBumpswithinbicyclistBufferZone_7.png" /> Speed Bumps within (bicyclist) Buffer Zone': layer_SpeedBumpswithinbicyclistBufferZone_7,'<img src="legend/ParkTrailsthatintersectwithbicyclistBufferZone_6.png" /> Park Trails that intersect with (bicyclist) Buffer Zone': layer_ParkTrailsthatintersectwithbicyclistBufferZone_6,'<img src="legend/BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5.png" /> Bike Lanes & Bike Routes that intersect with (bicyclist) Buffer Zone': layer_BikeLanesBikeRoutesthatintersectwithbicyclistBufferZone_5,'Severe Bicyclist Injury Areas<br /><table><tr><td style="text-align: center;"><img src="legend/SevereBicyclistInjuryAreas_4_220.png" /></td><td>2 - 2</td></tr><tr><td style="text-align: center;"><img src="legend/SevereBicyclistInjuryAreas_4_231.png" /></td><td>2 - 3</td></tr><tr><td style="text-align: center;"><img src="legend/SevereBicyclistInjuryAreas_4_342.png" /></td><td>3 - 4</td></tr></table>': layer_SevereBicyclistInjuryAreas_4,'<img src="legend/SpeedBumpsnotwithinInjuryAreaBufferZones_3.png" /> Speed Bumps not within Injury Area Buffer Zones': layer_SpeedBumpsnotwithinInjuryAreaBufferZones_3,'<img src="legend/ParkTrailsnotwithinInjuryAreaBufferZones_2.png" /> Park Trails not within Injury Area Buffer Zones': layer_ParkTrailsnotwithinInjuryAreaBufferZones_2,'<img src="legend/BikeFacilitiesnotwithinInjuryAreaBufferZones_1.png" /> Bike Facilities not within Injury Area Buffer Zones': layer_BikeFacilitiesnotwithinInjuryAreaBufferZones_1,"Base Map": layer_BaseMap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"District": "int","Total_Inju": "real","Fatal_Inju": "real"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_District = document.createElement("div");
+            div_District.id = "div_District";
+            div_District.className = "slider";
+            document.getElementById("menu").appendChild(div_District);
+            var lab_District = document.createElement('div');
+            lab_District.innerHTML  = 'District: <span id="val_District"></span>';
+            lab_District.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_District);
+            var reset_District = document.createElement('div');
+            reset_District.innerHTML = 'clear filter';
+            reset_District.className = 'filterlabel';
+            lab_District.className = 'filterlabel';
+            reset_District.onclick = function() {
+                sel_District.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_District);
+            var sel_District = document.getElementById('div_District');
+            noUiSlider.create(sel_District, {
+                connect: true,
+                start: [0, 10],
+                step: 1,
+                format: wNumb({
+                    decimals: 0,
+                    }),
+                range: {
+                min: 0,
+                max: 10
+                }
+            });
+            sel_District.noUiSlider.on('update', function (values) {
+            filterVals =[];
+            for (value in values){
+            filterVals.push(parseInt(value))
+            }
+            val_District = document.getElementById('val_District');
+            val_District.innerHTML = values.join(' - ');
+                filterFunc()
+            });
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Total_Inju = document.createElement("div");
+            div_Total_Inju.id = "div_Total_Inju";
+            div_Total_Inju.className = "slider";
+            document.getElementById("menu").appendChild(div_Total_Inju);
+            var lab_Total_Inju = document.createElement('div');
+            lab_Total_Inju.innerHTML  = 'Total_Inju: <span id="val_Total_Inju"></span>';
+            lab_Total_Inju.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_Total_Inju);
+            var reset_Total_Inju = document.createElement('div');
+            reset_Total_Inju.innerHTML = 'clear filter';
+            reset_Total_Inju.className = 'filterlabel';
+            lab_Total_Inju.className = 'filterlabel';
+            reset_Total_Inju.onclick = function() {
+                sel_Total_Inju.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_Total_Inju);
+            var sel_Total_Inju = document.getElementById('div_Total_Inju');
+            noUiSlider.create(sel_Total_Inju, {
+                connect: true,
+                start: [2.0, 15.0],
+                range: {
+                min: 2.0,
+                max: 15.0
+                }
+            });
+            sel_Total_Inju.noUiSlider.on('update', function (values) {
+            val_Total_Inju = document.getElementById('val_Total_Inju');
+            val_Total_Inju.innerHTML = values.join(' - ');
+                filterFunc()
+            });
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Fatal_Inju = document.createElement("div");
+            div_Fatal_Inju.id = "div_Fatal_Inju";
+            div_Fatal_Inju.className = "slider";
+            document.getElementById("menu").appendChild(div_Fatal_Inju);
+            var lab_Fatal_Inju = document.createElement('div');
+            lab_Fatal_Inju.innerHTML  = 'Fatal_Inju: <span id="val_Fatal_Inju"></span>';
+            lab_Fatal_Inju.className = 'filterlabel';
+            document.getElementById("menu").appendChild(lab_Fatal_Inju);
+            var reset_Fatal_Inju = document.createElement('div');
+            reset_Fatal_Inju.innerHTML = 'clear filter';
+            reset_Fatal_Inju.className = 'filterlabel';
+            lab_Fatal_Inju.className = 'filterlabel';
+            reset_Fatal_Inju.onclick = function() {
+                sel_Fatal_Inju.noUiSlider.reset();
+            };
+            document.getElementById("menu").appendChild(reset_Fatal_Inju);
+            var sel_Fatal_Inju = document.getElementById('div_Fatal_Inju');
+            noUiSlider.create(sel_Fatal_Inju, {
+                connect: true,
+                start: [1.0, 8.0],
+                range: {
+                min: 1.0,
+                max: 8.0
+                }
+            });
+            sel_Fatal_Inju.noUiSlider.on('update', function (values) {
+            val_Fatal_Inju = document.getElementById('val_Fatal_Inju');
+            val_Fatal_Inju.innerHTML = values.join(' - ');
+                filterFunc()
+            });
+        </script>
+    </body>
+</html>
